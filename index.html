@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Sistemas de Robótica</title>
+</head>
+<body>
+    <header>
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">Projeto de Sistemas de Robótica</h1>
+            <h4 class="mb-3">Estudo dos  robôs "UR3, 6DOF, standard_DH (mdl_ur3)" e "ABB, IRB140, 6DOF, standard_DH (mdl_irb140)"</h4>
+            <br>
+            <h4><strong>Trabalho realizado por:</strong></h4>
+            <h5 class="mb-3">Carlos Menduíña - 30002819 | João Dumba - 30002076 | José Sylla - 30003724</h5>
+            <div class="container">
+              <hr>
+              <h5>Professor: Laércio Cruvinel</h5>
+            </div>
+        </div>
+        <div class="mt-5 text-center">
+            <button class="btn btn-primary" href="" onclick="showUr3()">UR3</button>
+            <button class="btn btn-primary" href="" onclick="showIrb140()">IRB140</button>
+        </div>
+    </header>
+
+    <section id="ur3" class="container mt-5">
+        <h1 class="text-center">UR3, 6DOF, standard_DH (mdl_ur3)</h1>
+        <div class="text-center">
+            <img src="./static/ur3/ur3.png" alt="foto ur3">
+        </div>
+        <br>
+        <div>
+            O robô ur3 é considerado antropomórfico, isto é, tem características parecidas aos humanos. Este robô com 6 juntas pode funcionar como um braço humano com a característica especial do movimento circular do punho. 
+        </div>
+        <br>
+        <div>
+            Inicializamos o robot ur3.
+        </div>
+        <br>
+        <p>
+            >> mdl_ur3
+        </p>
+        <br>
+        <div>
+            Vemos as características do robô.
+        </div>
+        <br>
+        <p>
+            >> ur3 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_dh.png" alt="foto ur3 dh">
+        </div>
+        <br>
+        <div>
+            A tabela oferece uma descrição detalhada do robô segundo os parâmetros Denavit-Hartenberg. Este tipo de notação é um método para conhecer a relação da cinemática entre dois elos conectados. Assim, este método é baseado na representação da posição e orientação de um corpo rígido. 
+        </div>
+        <br>
+        <div>
+            Pode-se ver que tem 6 juntas de rotação indicadas pela letra ‘R’. É possível ver o número específico de juntas com o comando de abaixo. 
+        </div>
+        <br>
+        <p>
+            >> ur3.n 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_n.png" alt="foto ur3 n">
+        </div>
+        <br>
+        <div>
+            Por otra parte, podemos ver as juntas representadas em tipo de objetos vector que conformam o robô. 
+        </div>
+        <br>
+        <p>
+            >> links = ur3.links 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_links.png" alt="foto ur3 links">
+        </div>
+        <br>
+        <div>
+            Para visualizar o robô fazemos plot() e um vector de posição ‘q’, por exemplo qz = [0 0 0 0 0 0] que já veio no momento de inicialização do robô.
+        </div>
+        <br>
+        <p>
+            >> ur3.plot(qz) 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_plot1.png" alt="foto ur3 plot">
+        </div>
+        <br>
+        <div>
+            Para calcular a cinemática directa (<i>forward kinematic</i>) utlizamos o método fkine() que devolve a matriz de transformação homogênea correspondente à posição do end-effector. Podemos observar esta transformação com algum vector dado, por exemplo. 
+        </div>
+        <br>
+        <p>
+            >> ur3.fkine(qz) 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_fkine.png" alt="foto ur3 fkine">
+        </div>
+        <br>
+        <p>
+            >> ur3.fkine(qr) 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_fkine1.png" alt="foto ur3 fkine">
+        </div>
+        <br>
+        <div>
+            Onde ‘qr’ tem os seguintes valores. 
+        </div>
+        <br>
+        <p>
+            >> qr 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_qr.png" alt="foto ur3 qr">
+        </div>
+        <br>
+        <div>
+            Observemos agora o robô com os valores de ‘qr’ 
+        </div>
+        <br>
+        <p>
+            >> ur3.plot(qr) 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_plot2.png" alt="foto ur3 plot">
+        </div>
+        <br>
+        <div>
+            Com o método teach() podemos também visualizar o robô e alterar os valores das juntas gráficamente. De forma predefinida o vector de posiçao que utliza é [0 0 0 0 0 0].
+        </div>
+        <br>
+        <p>
+            >> ur3.teach()
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_teach.png" alt="foto ur3 teach">
+        </div>
+        <br>
+        <div>
+            Com este gráfico podemos observar que o end-effector (q6) rota em torno ao eixo z completando uma volta completa. 
+        </div>
+        <br>
+        <div>
+            Existem outras formas de mostrar as interfaces. Assim, no GitHub do PeterCorke (https://github.com/petercorke/robotics-toolbox-matlab/blob/master/%40SerialLink/SerialLink.m) mostra os seguintes displays para interfaces. Também no página do Peter Cork sobre a documentação do SerialLink (https://www.petercorke.com/RTB/r9/html/SerialLink.html) podemos ver que há opções para o método teach().
+        </div>
+        <br>
+        <div>
+            <img src="./static/ur3/teach_options.png" alt="foto teach opçoes">
+        </div>
+        <br>
+        <div>
+            Podemos ver um exemplo.
+        </div>
+        <br>
+        <p>
+            >> ur3.teach(‘rpy’) 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_teach1.png" alt="foto ur3 teach">
+        </div>
+        <br>
+        <div>
+            Para calcular a cinemática inversa é preciso conhecer a cinemática direta. Já falamos que o método fkine() devolve a matriz de transformação homogênea dado um vector <i>q</i>. Esta pose é representada pela letra T. Segue um exemplo com qz. 
+        </div>
+        <br>
+        <p>
+            >> mdl_ur3<br>
+            >> T = ur3.fkine(qz)<br>
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_T.png" alt="foto ur3 T">
+        </div>
+        <br>
+        <div>
+            Agora com o método ikine() (<i>inverse kinematics</i>) obtemos as coordenadas das juntas dada a matriz de transformação homogênea. No nosso caso, esta matriz foi definida como T. 
+        </div>
+        <br>
+        <p>
+            >> ur3.ikine(T) 
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/ur3_ikine.png" alt="foto ur3 T">
+        </div>
+        <br>
+        <div>
+            Podemos comprovar que a resposta são os valores das coordenadas do vector qz, o qual foi utilizado para encontrar a matriz de transformação homogêna. 
+        </div>
+        <br>
+        <div>
+            É importante saber que também existe o método ikine6s() mas este é utilizado para robôs de punho esférico, o qual é muito comum nos robôs industriais. Também existe o método ikine3() que serve para calcular a cinemática inversa de um robô de três graus de liberdade sem punho esférico.
+        </div>
+        <br>
+        <div>
+            A seguir mostramos um exemplo de movimento que faz o robô de um vector a outro com parâmetros predefinidos previamente.
+        </div>
+        <div>
+            Primeiro escolhemos os vectores. No nosso caso sao os vetores qz e qr. A seguir definimos o número de vectores, isto são passos, que vai fazer o robô desde o ponto inicial até o ponto final. Quanto maior seja o número mais passos vai fazer na trajetória.
+        </div>
+        <br>
+        <p>
+            >> qt = jtraj(qz, qr, 100)<br>
+            >> ur3.plot(qt)<br>
+        </p>
+        <br>
+        <div>
+            <img src="./static/ur3/gifs/ur3.plot_2.gif" alt="trajetoria ur3">
+        </div>
+        <br>
+        <div class="text-center">
+            <video controls width="640" height="480">
+                <source src="static/ur3/ur3_1.mp4" type="video/mp4">
+            </video>
+        </div>
+        <br>
+        <div class="mt-5 text-center">
+            <button class="btn btn-primary" onclick="showUr3Poses()">Poses</button>
+            <button class="btn btn-primary" onclick="showUr3Animations()">Animações</button>
+            <button class="btn btn-primary" onclick="showUr3Gui()">GUI</button>
+        </div>
+        <br>
+        <section id="ur3Poses">
+            <div class="card-group">
+                <div class="card">
+                    <h5 class="card-title"><strong>ur3.plot(qz)</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/ur3/poses/qz.png" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qz = [0 0 0 0 0 0]</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-title"><strong>ur3.plot(qr)</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/ur3/poses/qr.png" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qr = [3.1416 0 0 0 1.5708 0]</small></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card-group ur3Poses">
+                <div class="card">
+                    <h5 class="card-title"><strong>ur3.plot(qd)</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/ur3/poses/qd.png" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qd = [-1.5708 0 1.5708 3.1416 0 0]</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-title"><strong>ur3.plot(qn)</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/ur3/poses/qn.png" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qn = [3.1416 0 -1.5708 3.1416 0 0]</small></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="ur3Animations">
+            <div class="card-group">
+                <div class="card">
+                    <h5 class="card-title"><strong>Trajetória de qz a qr</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/ur3/gifs/ur3_qz_qr(1).gif">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qz = [0 0 0 0 0 0]; qr = [3.1416 0 0 0 1.5708 0]</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-title"><strong>Trajetória de qr a qd</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/ur3/gifs/ur3_qr_qd(3).gif">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qr = [3.1416 0 0 0 1.5708 0]; qd = [-1.5708 0 1.5708 3.1416 0 0]</small></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card-group ur3Poses">
+                <div class="card">
+                    <h5 class="card-title"><strong>Trajetória de qd a qn</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/ur3/gifs/ur3_qd_qn(2).gif">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qd = [-1.5708 0 1.5708 3.1416 0 0]; qn = [3.1416 0 -1.5708 3.1416 0 0]</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-title"><strong>Trajetória de qn a qz</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/ur3/gifs/ur3_qn_qz(4).gif">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qn = [3.1416 0 -1.5708 3.1416 0 0]; qz = [0 0 0 0 0 0]</small></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div id="ur3Teach" class="container text-center">
+                <img src="./static/ur3/gifs/ur3.teach_1.gif" alt="irb140 teach">
+            </div>
+        </section>
+        <br>
+    </section>
+    <section id="irb140" class="container mt-5">
+        <h1 class="text-center">
+            ABB, IRB140, 6DOF, standard_DH (mdl_irb140) 
+        </h1>
+        <div class="text-center">
+            <img src="./static/irb140/irb140.png" alt="foto irb140">
+        </div>
+        <br>
+        <div>
+            O robô irb140 é considerado antropomórfico, isto é, tem características parecidas aos humanos. Este robô com 6 juntas pode funcionar como um braço humano com a característica especial do movimento circular do pulso. 
+        </div>
+        <br>
+        <div>
+            Inicializamos o robô irb140 e vemos suas características.
+        </div>
+        <br>
+        <p>
+            >> mdl_irb140
+        </p>
+        <div>
+            <img src="./static/irb140/irb140_dh.png" alt="foto irb140 dh">
+        </div>
+        <br>
+        <div>
+            Observamos que este robot tem seis graus de liberdade todos de tipo de rotação. A seguir mostramos o robô.
+        </div>
+        <br>
+        <p>
+            >> irb140.plot(qz); 
+        </p>
+        <div>
+            <img src="./static/irb140/irb140_plot.png" alt="foto irb140">
+        </div>
+        <br>
+        <div>
+            Agora vamos mostrar os valores das posiçoes angulares de uma trajetória.
+        </div>
+        <br>
+        <p>
+            >> t = [0:.05:5];<br>
+            >> q = jtraj(qz, qr, t)<br>
+            >> figure(1);<br>
+            >> subplot(2,1,1)<br>
+            >> plot(t,q(:,1));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 1 rad');<br>
+            >> subplot(2,1,2)<br>
+            >> plot(t,q(:,2));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 2 rad');<br>
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_theta1_2.png" alt="foto irb140h">
+        </div>
+        <br>
+        <p>
+            >> figure(1);<br>
+            >> subplot(2,1,1)<br>
+            >> plot(t,q(:,3));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 3 rad');<br>
+            >> subplot(2,1,2)<br>
+            >> plot(t,q(:,4));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 4 rad');<br>
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_theta3_4.png" alt="foto irb140">
+        </div>
+        <br>
+        <p>
+            >> figure(1);<br>
+            >> subplot(2,1,1)<br>
+            >> plot(t,q(:,5));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 5 rad');<br>
+            >> subplot(2,1,2)<br>
+            >> plot(t,q(:,6));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 6 rad');<br>
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_theta5_6.png" alt="foto irb140">
+        </div>
+        <br>
+        <div>
+            Observamos que as juntas 2 e 6 pasam de 0 a –1.5 durante os 5 segundos da trajetória. Da mesma forma as juntas 3 e 5 passam de 0 a 1.5 nos valores theta.
+        </div>
+        <br>
+        <div>
+            Vamos agora ver os gráficos da velocidade e acelaração angular. Primeiro obtemos os valores da posição angular, a velocidade angular e acelaração angular.
+        </div>
+        <br>
+        <p>
+            >> [q, dq, ddq] = jtraj(qz, qr, t); 
+        </p>
+        <br>
+        <div>
+            A seguir seguem os valores respeitivos para cada junta do robô.
+        </div>
+        <br>
+        <p>
+            >> figure(1);<br>
+            >> subplot(3,1,1)<br>
+            >> plot(t,q(:,1));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 1 rad');<br>
+            >> subplot(3,1,2)<br>
+            >> plot(t,dq(:,1));<br>
+            >> title('Velocidade');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 1 rad/s');<br>
+            >> subplot(3,1,3)<br>
+            >> plot(t,ddq(:,1));<br>
+            >> title('Aceleraçao');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 1 rad/s²'); 
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_v_a_1.png" alt="foto irb140">
+        </div>
+        <br>
+        <p>
+            >> figure(1);<br>
+            >> subplot(3,1,1)<br>
+            >> plot(t,q(:,2));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 2 rad');<br>
+            >> subplot(3,1,2)<br>
+            >> plot(t,dq(:,2));<br>
+            >> title('Velocidade');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 2 rad/s');<br>
+            >> subplot(3,1,3)<br>
+            >> plot(t,ddq(:,2));<br>
+            >> title('Aceleraçao');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 2 rad/s²');<br>
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_v_a_2.png" alt="foto irb140">
+        </div>
+        <br>
+        <p>
+            >> figure(1);<br>
+            >> subplot(3,1,1)<br>
+            >> plot(t,q(:,3));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 3 rad');<br>
+            >> subplot(3,1,2)<br>
+            >> plot(t,dq(:,3));<br>
+            >> title('Velocidade');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 3 rad/s');<br>
+            >> subplot(3,1,3)<br>
+            >> plot(t,ddq(:,3));<br>
+            >> title('Aceleraçao');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 3 rad/s²');<br>
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_v_a_3.png" alt="foto irb140">
+        </div>
+        <br>
+        <p>
+            >> figure(1);<br>
+            >> subplot(3,1,1)<br>
+            >> plot(t,q(:,4));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 4 rad');<br>
+            >> subplot(3,1,2)<br>
+            >> plot(t,dq(:,4));<br>
+            >> title('Velocidade');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 4 rad/s');<br>
+            >> subplot(3,1,3)<br>
+            >> plot(t,ddq(:,4));<br>
+            >> title('Aceleraçao');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 4 rad/s²');<br>
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_v_a_4.png" alt="foto irb140">
+        </div>
+        <br>
+        <p>
+            >> figure(1);<br>
+            >> subplot(3,1,1)<br>
+            >> plot(t,q(:,5));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 5 rad');<br>
+            >> subplot(3,1,2)<br>
+            >> plot(t,dq(:,5));<br>
+            >> title('Velocidade');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 5 rad/s');<br>
+            >> subplot(3,1,3)<br>
+            >> plot(t,ddq(:,5));<br>
+            >> title('Aceleraçao');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 5 rad/s²'); 
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_v_a_5.png" alt="foto irb140">
+        </div>
+        <br>
+        <p>
+            >> figure(1);<br>
+            >> subplot(3,1,1)<br>
+            >> plot(t,q(:,6));<br>
+            >> title('Theta');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 6 rad');<br>
+            >> subplot(3,1,2)<br>
+            >> plot(t,dq(:,6));<br>
+            >> title('Velocidade');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 6 rad/s');<br>
+            >> subplot(3,1,3)<br>
+            >> plot(t,ddq(:,6));<br>
+            >> title('Aceleraçao');<br>
+            >> xlabel('Tempo (s)');<br>
+            >> ylabel('Junta 6 rad/s²'); 
+        </p>
+        <br>
+        <div>
+            <img src="./static/irb140/irb140_v_a_6.png" alt="foto irb140">
+        </div>
+        <br>
+        <div>
+            Finalmente, vemos a trajetória do robô com os valores dados e o tempo definido. 
+        </div>
+        <br>
+        <p>
+            >> irb140.plot(q); 
+        </p>
+        <div>
+            <img src="./static/irb140/gifs/irb140.plot.gif" alt="foto irb140">
+        </div>
+        <br>
+        <div class="text-center">
+            <video controls width="640" height="480">
+                <source src="static/irb140/irb140_2.mp4" type="video/mp4">
+            </video>
+        </div>
+        <br>
+        <div class="text-center">
+            <video controls width="640" height="480">
+                <source src="static/irb140/irb140_1.mp4" type="video/mp4">
+            </video>
+        </div>
+        <br>
+        <div class="mt-5 text-center">
+            <button class="btn btn-primary" onclick="showIrb140Poses()">Poses</button>
+            <button class="btn btn-primary" onclick="showIrb140Animations()">Animações</button>
+            <button class="btn btn-primary" onclick="showIrb140Gui()">GUI</button>
+        </div>
+        <br>
+        <section id="irb140Poses">
+            <div class="card-group">
+                <div class="card">
+                    <h5 class="card-title"><strong>irb140.plot(qz)</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/irb140/poses/qz.png" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qz = [0 0 0 0 0 0]</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-title"><strong>irb140.plot(qr)</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/irb140/poses/qr.png" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qr = [0 -1.5708 1.5708 0 1.5708 -1.5708]</small></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card-group irb140Poses">
+                <div class="card">
+                    <h5 class="card-title"><strong>irb140.plot(qd)</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/irb140/poses/qd.png" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qd = [0 -1.5708 3.1416 0 0 -1.5708]</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-title"><strong>irb140.plot(qn)</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/irb140/poses/qn.png" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qn = [3.1416 0 0 3.1416 -1.5708 3.1416]</small></p>
+                    </div>
+                </div>
+              </div>
+        </section>
+        <section id="irb140Animations">
+            <div class="card-group irb140Poses">
+                <div class="card">
+                    <h5 class="card-title"><strong>Trajetória qz a qr</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/irb140/gifs/irb 140_1(qzqr).gif" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qz = [0 0 0 0 0 0]; qr = 0 -1.5708 1.5708 0 1.5708 -1.5708</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-title"><strong>Trajetória qr a qd</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/irb140/gifs/irb 140_3(qrqd).gif" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qr = [0 -1.5708 1.5708 0 1.5708 -1.5708]; qd = [0 -1.5708 3.1416 0 0 -1.5708]</small></p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card-group">
+                <div class="card">
+                    <h5 class="card-title"><strong>Trajetória qd a qn</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/irb140/gifs/irb 140_2(qdqn).gif" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qd = [0 -1.5708 3.1416 0 0 -1.5708]; qn = [3.1416 0 0 3.1416 -1.5708 3.1416]</small></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-title"><strong>Trajetória qn a qz</strong></h5>
+                    <div class="card-body">
+                        <img class="card-img-top" src="./static/irb140/gifs/irb 140_4(qnqz).gif" alt="Card image cap">
+                    </div>
+                    <div>
+                        <p class="card-text"><small class="text-muted">qn = [3.1416 0 0 3.1416 -1.5708 3.1416]; qz = [0 0 0 0 0 0]</small></p>
+                    </div>
+                </div>
+              </div>
+        </section>
+        <section>
+            <div id="irb140Teach" class="container text-center">
+                <img src="./static/irb140/gifs/irb140.teach.gif" alt="irb140 teach">
+            </div>
+        </section>
+        <br>
+    </section>
+    <br>
+    <footer class="bg-light text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(248, 248, 255, 0.2);">
+            Autores: Carlos Menduíña - 30002819 | João Dumba - 30002076 | José Sylla - 30003724
+        </div>
+      </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    
+    <script>
+        function showUr3() {
+            document.getElementById('ur3').style.display = 'block';
+            document.getElementById('irb140').style.display = 'none';
+        }
+
+        function showIrb140() {
+            document.getElementById('ur3').style.display = 'none';
+            document.getElementById('irb140').style.display = 'block';
+        }
+
+        function showUr3Poses() {
+            document.getElementById('ur3Poses').style.display = 'block';
+            document.getElementById('ur3Animations').style.display = 'none';
+            document.getElementById('ur3Teach').style.display = 'none';
+        }
+
+        function showIrb140Poses() {
+            document.getElementById('ur3Poses').style.display = 'none';
+            document.getElementById('irb140Poses').style.display = 'block';
+            document.getElementById('irb140Animations').style.display = 'none';
+        }
+
+        function showUr3Animations() {
+            document.getElementById('ur3Animations').style.display = 'block';
+            document.getElementById('ur3Poses').style.display = 'none';
+            document.getElementById('ur3Teach').style.display = 'none';
+        }
+
+        function showIrb140Animations() {
+            document.getElementById('irb140Animations').style.display = 'block';
+            document.getElementById('irb140Poses').style.display = 'none';
+            document.getElementById('irb140Teach').style.display = 'none';
+        }
+
+        function showUr3Gui() {
+            document.getElementById('ur3Animations').style.display = 'none';
+            document.getElementById('ur3Poses').style.display = 'none';
+            document.getElementById('ur3Teach').style.display = 'block';
+        }
+
+        function showIrb140Gui() {
+            document.getElementById('irb140Animations').style.display = 'none';
+            document.getElementById('irb140Poses').style.display = 'none';
+            document.getElementById('irb140Teach').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
